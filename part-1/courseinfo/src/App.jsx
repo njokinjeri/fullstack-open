@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from "react";
 
 const App = () => {
@@ -23,6 +25,7 @@ const App = () => {
 
 // Header component
 
+// eslint-disable-next-line react/prop-types
 const Header = ({ course }) => {
   return (
     <header>
