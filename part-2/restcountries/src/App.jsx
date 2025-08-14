@@ -29,7 +29,8 @@ const App = () => {
         find countries: <input value={filter} onChange={handleFilterChange}/>
       </div>
       
-      <CountryList countries={filteredCountries} />
+      <CountryList countries={filteredCountries}
+      setFilter={setFilter} />
     </div>
   );
 }
