@@ -1,8 +1,8 @@
-# 🌀 Fullstack Open Course Repository
+# Fullstack Open Course Repository
 
 This repository showcases my progress and learning outcomes from the [Fullstack Open Course](https://fullstackopen.com/en/#course-contents). The works cover both frontend and backend development with modern web technologies.
 
-## 🔔 Table of Contents
+## Table of Contents
 
 - [Course Overview](#course-overview)
 - [Course Parts](#course-parts)
@@ -16,6 +16,9 @@ This repository showcases my progress and learning outcomes from the [Fullstack 
   - [Part 7: React Router, Custom Hooks, and Advanced Features](#part-7-react-router-custom-hooks-and-advanced-features)
   - [Part 8: GraphQL](#part-8-graphql)
   - [Part 9: TypeScript](#part-9-typescript)
+  - [Part 11: CI/CD](#part-11-CI/CD)
+  - [Part 12: Containers](#part-12-Containers)
+  - [Part 13: Relational Databases](#part-12-relational-databases)
 - [Projects](#projects)
 - [Resources](#resources)
 
@@ -24,7 +27,7 @@ This repository showcases my progress and learning outcomes from the [Fullstack 
 The course covers full-stack web development, with a focus on React, Redux, Node.js, MongoDB, GraphQL, and TypeScript.
 
 
-## 🌊 Course Parts
+## Course Parts
 
 ### Part 0: Fundamentals of Web Apps
 
@@ -76,7 +79,22 @@ The course covers full-stack web development, with a focus on React, Redux, Node
 - **Topics**: TypeScript basics, interfaces, types, working with React and TypeScript.
 - **Key Project**: TypeScript integration in a full-stack project.
 
-## 🐘 Projects
+### Part 11: Continuous Integration / Continuous Delivery
+
+- **Topics**: CI/CD pipelines, automated testing, linting and deployment workflows
+- **Key Project**: Implementing a full CI/CD pipeline using GitHub Actions.
+
+### Part 12: Containers
+
+- **Topics**: Docker fundamentals, containerizing apps, and multi-container setups with Docker Compose.
+- **Key Project**: Packaging the full-stack app into Docker containers.
+
+### Part 13: Relational Databases
+
+- **Topics**: SQL, relational modeling, PostgreSQL, and database migrations.
+- **Key Project**: Integrating PostgreSQL and building relational CRUD functionality.
+
+## Projects
 
 Each part has associated projects to reinforce the concepts taught. You can find the project files inside the respective part folders. Some of the notable projects include:
 
@@ -86,13 +104,8 @@ Each part has associated projects to reinforce the concepts taught. You can find
 - **Anecdote App**: Redux-based app for managing anecdotes.
 - **Book Library**: GraphQL-based app for managing a book library.
 
-## 🚀 Resources
+## Resources
 
 - [Fullstack Open Course](https://fullstackopen.com/en/)
 - [React Documentation](https://react.dev/)
 
-
-
-## ⚡ Knowledge Base
-
-Detailed notes and in-depth explorations of complex topics are organized and stored in my personal knowledge management system within obsidian.
