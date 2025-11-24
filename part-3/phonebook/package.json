@@ -10,7 +10,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "cd ./part-2/phonebook && rm -rf dist && npm run build && mkdir -p ../../part-3/backend/dist && cp -r dist/* ../../part-3/backend/dist",
+    "build:ui": "rm -rf dist && cd ../../part-2/phonebook && npm run build && cp -r dist ../../part-3/phonebook/",
+    "deploy": "npm run build:ui && git add . && git commit -m 'Deploy update' && git push",
     "deploy:full": "npm run build:ui && git add . && git commit -m 'ui build' && git push"
   },
   "dependencies": {
