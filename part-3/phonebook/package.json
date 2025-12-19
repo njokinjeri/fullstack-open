@@ -15,7 +15,10 @@
     "deploy:full": "npm run build:ui && git add . && git commit -m 'ui build' && git push"
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.0.2",
     "morgan": "^1.10.1"
   },
   "devDependencies": {
