@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const url = process.env.MONGODB_URI;
 
 mongoose.set('strictQuery', false);
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(url)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => {
         console.error('Error connecting to MongoDB:', err.message)
