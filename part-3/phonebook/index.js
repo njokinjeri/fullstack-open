@@ -62,7 +62,7 @@ app.get('/api/persons/:id', (req, res) => {
 });
 
 app.delete('/api/persons/:id', (req, res) => {
-    Person.findByIdAndRemove(req.params.id)
+    Person.findByIdAndDelete(req.params.id)
         .then(() => res.status(204).end())
         .catch(() => res.status(400).send({error: 'malformatted id'}));
 });
