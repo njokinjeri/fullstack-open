@@ -1,33 +1,15 @@
 require('dotenv').config();
 const express = require('express');
+const Person = require('./models/person');
+const app = express();
 const morgan = require('morgan');
-const mongoose = require('mongoose');
 const cors = require('cors');
 
-const app = express();
+app.use(express.json());
 app.use(cors());
 
-const url = process.env.MONGODB_URI;
-
-mongoose.set('strictQuery', false);
-
-mongoose.connect(url)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => {
-        console.error('Error connecting to MongoDB:', err.message)
-        process.exit(1);
-    });
-
-const personSchema = new mongoose.Schema({
-  name: String,
-  number: String
-});
-
-const Person = mongoose.model('Person', personSchema);
-
-
 app.use(express.static('dist'));
-app.use(express.json());
+
 
 morgan.token('postData', (request) => {
     if (request.method === 'POST') return ' ' + JSON.stringify(request.body);
@@ -37,6 +19,15 @@ morgan.token('postData', (request) => {
 app.use(morgan(
     ':method :url :status :res[content-length] - :response-time ms :postData'
 ));
+
+const errorHandler = (err, req, res, next) => {
+    console.error(err.message);
+
+    if (err.name === 'CastError') {
+        return res.status(400).send({ err: 'malformatted id'})
+    }
+    next(err)
+}
 
 app.get('/api/persons', (req, res) => {
     Person.find({}).then(persons => {
@@ -52,22 +43,22 @@ app.get('/info', (req, res) => {
     });
 });
 
-app.get('/api/persons/:id', (req, res) => {
+app.get('/api/persons/:id', (req, res, next) => {
     Person.findById(req.params.id)
         .then(person => {
             if (person) res.json(person);
             else res.status(404).end();
         })
-        .catch(() => res.status(400).send({ error: 'malformatted id'}));
+        .catch(error => next(error));
 });
 
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req, res, next) => {
     Person.findByIdAndDelete(req.params.id)
         .then(() => res.status(204).end())
-        .catch(() => res.status(400).send({error: 'malformatted id'}));
+        .catch(error => next(error));
 });
 
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
     const {name, number} = req.body;
 
     if (!name || !number) {
@@ -83,11 +74,14 @@ app.post('/api/persons', (req, res) => {
 
         const person = new Person({ name, number });
         person.save().then(savedPerson => {
-        res.json(savedPerson);
+            res.json(savedPerson);
         }); 
     });
 });
 
-const PORT = process.env.PORT || 3001;
+app.use(errorHandler)
+
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
  

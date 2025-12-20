@@ -18,6 +18,7 @@ const personSchema = new mongoose.Schema({
   number: String
 });
 
+
 const Person = mongoose.model('Person', personSchema);
 
 mongoose.connect(url)
