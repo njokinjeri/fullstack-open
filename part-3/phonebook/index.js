@@ -21,11 +21,19 @@ app.use(morgan(
 ))
 
 const errorHandler = (err, req, res, next) => {
-    console.error(err.message)
+    console.log('Headers already sent?', res.headersSent)
+
+    if (res.headersSent) {
+        return next(err)
+    }
+    console.error('ERROR NAME:', err.name)
+    console.error('Error Message:', err.message)
+    console.error('FULL ERROR:', err)
 
     if (err.name === 'CastError') {
         return res.status(400).send({ error: 'malformatted id' })
     } else if (err.name === 'ValidationError') {
+        console.log('SENDING VALIDATION ERROR TO CLIENT')
         return res.status(400).json({ error: err.message })
     } 
     next(err)
