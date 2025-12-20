@@ -68,7 +68,7 @@ const App = () => {
                 }, 5000)
               })
               .catch(error => {
-                setErrorMessage(error.response.data.error);
+                setErrorMessage(`Information of ${newName} has already been removed from the server.`);
                 setPersons(persons.filter(p => p.id !== existingPerson.id));
                 setTimeout(() => {
                   setErrorMessage(null);
@@ -77,24 +77,25 @@ const App = () => {
           }
           return;
         }
-
-    personService
-      .create(newPerson)
-      .then(returnedPerson => {
-        setPersons([...persons, returnedPerson]);
-        setNewName('');
-        setNumber('');
-        setSuccessMessage(`Added '${returnedPerson.name}'`)
-        setTimeout(() => {
-          setSuccessMessage(null)
-        }, 5000);
-      })
-      .catch(error => {
-        setErrorMessage(error.response.data.error);
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000);
-      })
+        
+        personService
+          .create(newPerson)
+          .then(returnedPerson => {
+            setPersons([...persons, returnedPerson]);
+            setNewName('');
+            setNumber('');
+            setSuccessMessage(`Added '${returnedPerson.name}'`)
+            setTimeout(() => {
+              setSuccessMessage(null)
+            }, 5000);
+          })
+          .catch(error => {
+            setErrorMessage(error.response.data.error)
+            console.log(error.response.data.error)
+            setTimeout(() => {
+              setErrorMessage(null);
+            }, 5000);
+          });
     };
 
     const filteredPersons = persons.filter( person => 
