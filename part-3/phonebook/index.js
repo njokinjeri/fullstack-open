@@ -24,10 +24,10 @@ const errorHandler = (err, req, res, next) => {
     console.error(err.message)
 
     if (err.name === 'CastError') {
-        return res.status(400).send({ err: 'malformatted id' })
-    } else if (err.name === 'Validation Error') {
-        return res.status(400).json({ err: err.message })
-    }
+        return res.status(400).send({ error: 'malformatted id' })
+    } else if (err.name === 'ValidationError') {
+        return res.status(400).json({ error: err.message })
+    } 
     next(err)
 }
 
@@ -69,17 +69,19 @@ app.post('/api/persons', (req, res, next) => {
         })
     }
     
-    Person.findOne({ name }).then(existing => {
-        if (existing) {
-            return res.status(400).json({ error: 'name must be unique' });
-        }
+    Person.findOne({ name })
+        .then(existing => {
+            if (existing) {
+                return res.status(400).json({ error: 'name must be unique' });
+            }
 
-        const person = new Person({ name, number })
-        person.save().then(savedPerson => {
-            res.json(savedPerson)
+            const person = new Person({ name, number })
+
+            return person.save().then(savedPerson => {
+                res.json(savedPerson)
+            })
         })
         .catch(error => next(error))
-    })
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
@@ -104,10 +106,7 @@ app.put('/api/persons/:id', (req, res, next) => {
                 res.json(updatedPerson)
             })
         })
-        .catch(error => { 
-            console.log('Error caught:', error)
-            next(error)
-        })
+        .catch(error => next(error))
 })
 
 app.use(errorHandler)
