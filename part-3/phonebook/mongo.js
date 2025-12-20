@@ -30,6 +30,6 @@ mongoose.connect(url)
     mongoose.connection.close()
   })
   .catch(err => {
-    console.error('MongoDB error:', err.message);
+    console.error('MongoDB error:', err.message)
     mongoose.connection.close()
-  });
+  })
