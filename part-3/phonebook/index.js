@@ -76,10 +76,12 @@ app.post('/api/persons', (req, res, next) => {
             }
 
             const person = new Person({ name, number })
-
-            return person.save().then(savedPerson => {
+            return person.save()
+        })
+        .then(savedPerson => {
+            if (savedPerson) { 
                 res.json(savedPerson)
-            })
+            }
         })
         .catch(error => next(error))
 })
@@ -101,10 +103,13 @@ app.put('/api/persons/:id', (req, res, next) => {
             person.name = name
             person.number = number
 
-            return person.save().then((updatedPerson) => {
+            return person.save()
+        })
+        .then((updatedPerson) => {
+            if (updatedPerson) {
                 console.log('Person saved:', updatedPerson)
                 res.json(updatedPerson)
-            })
+            }
         })
         .catch(error => next(error))
 })
