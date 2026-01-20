@@ -16,8 +16,8 @@ mongoose
         console.log('error connecting to MongoDB:', error.message)
     })
 
-app.use(express.json());
-app.use('/api/blogs', blogsRouter);
+app.use(express.json())
+app.use('/api/blogs', blogsRouter)
 
 
 module.exports = app
